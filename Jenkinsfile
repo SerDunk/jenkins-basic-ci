@@ -31,7 +31,7 @@ pipeline {
                 echo 'Running tests...'
                 script {
                     // You can add tests here if needed
-                    sh 'echo "Tests passed!"'
+                    bat 'echo Tests passed!'
                 }
             }
         }
@@ -51,8 +51,8 @@ pipeline {
         stage('Cleanup') {
             steps {
                 echo 'Cleaning up...'
-                sh "docker rmi ${REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG} || true"
-                sh "docker rmi ${REGISTRY}/${DOCKER_IMAGE}:latest || true"
+                bat "docker rmi ${REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG} || exit 0"
+                bat "docker rmi ${REGISTRY}/${DOCKER_IMAGE}:latest || exit 0"
             }
         }
     }
