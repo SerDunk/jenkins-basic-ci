@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'portfolio-site'
         DOCKER_TAG = "${BUILD_NUMBER}"
-        REGISTRY = 'your-dockerhub-username'  // Change this to your Docker Hub username
+        REGISTRY = 'serdunk'  // Change this to your Docker Hub username
     }
     
     stages {

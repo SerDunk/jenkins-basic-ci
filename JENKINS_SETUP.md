@@ -5,6 +5,7 @@ This guide will help you set up a Jenkins pipeline to build Docker images from y
 ## Prerequisites
 
 Before you start, make sure you have:
+
 - ✅ Jenkins installed and running
 - ✅ Docker installed on the Jenkins server
 - ✅ GitHub repository: https://github.com/SerDunk/jenkins-basic-ci.git
@@ -17,6 +18,7 @@ Before you start, make sure you have:
 1. Go to Jenkins Dashboard → **Manage Jenkins** → **Manage Plugins**
 2. Click on the **Available** tab
 3. Search and install the following plugins:
+
    - **Docker Pipeline**
    - **Docker Plugin**
    - **Git Plugin**
@@ -62,20 +64,23 @@ Before you start, make sure you have:
 4. In the configuration page:
 
 ### General Section:
-   - Check **GitHub project**
-   - Project url: `https://github.com/SerDunk/jenkins-basic-ci/`
+
+- Check **GitHub project**
+- Project url: `https://github.com/SerDunk/jenkins-basic-ci/`
 
 ### Build Triggers (Optional):
-   - Check **GitHub hook trigger for GITScm polling** (for automatic builds)
-   - OR check **Poll SCM** and set schedule: `H/5 * * * *` (checks every 5 minutes)
+
+- Check **GitHub hook trigger for GITScm polling** (for automatic builds)
+- OR check **Poll SCM** and set schedule: `H/5 * * * *` (checks every 5 minutes)
 
 ### Pipeline Section:
-   - **Definition**: Pipeline script from SCM
-   - **SCM**: Git
-   - **Repository URL**: `https://github.com/SerDunk/jenkins-basic-ci.git`
-   - **Credentials**: Add if private repo (otherwise leave as none)
-   - **Branch Specifier**: `*/main` (or `*/master` depending on your default branch)
-   - **Script Path**: `Jenkinsfile`
+
+- **Definition**: Pipeline script from SCM
+- **SCM**: Git
+- **Repository URL**: `https://github.com/SerDunk/jenkins-basic-ci.git`
+- **Credentials**: Add if private repo (otherwise leave as none)
+- **Branch Specifier**: `*/main` (or `*/master` depending on your default branch)
+- **Script Path**: `Jenkinsfile`
 
 5. Click **Save**
 
@@ -136,11 +141,13 @@ git push -u origin main
 After successful build:
 
 1. Check Docker Hub:
+
    - Go to https://hub.docker.com
    - Login and check your repositories
    - You should see `your-username/portfolio-site` with tags
 
 2. Or check locally on Jenkins server:
+
    ```bash
    docker images | grep portfolio-site
    ```
@@ -155,7 +162,9 @@ After successful build:
 ## Troubleshooting
 
 ### Issue: "Docker command not found"
-**Solution**: 
+
+**Solution**:
+
 - Add Jenkins user to docker group:
   ```bash
   sudo usermod -aG docker jenkins
@@ -163,20 +172,27 @@ After successful build:
   ```
 
 ### Issue: "Permission denied" for Docker
+
 **Solution**:
+
 - Ensure Jenkins has permission to run Docker commands
 - On Linux: `sudo chmod 666 /var/run/docker.sock`
 
 ### Issue: "Git command not found"
+
 **Solution**: Install Git on Jenkins server
 
 ### Issue: Pipeline fails at Push stage
-**Solution**: 
+
+**Solution**:
+
 - Verify Docker Hub credentials are correct
 - Ensure credential ID is `dockerhub-credentials`
 
 ### Issue: "Docker daemon not running"
-**Solution**: 
+
+**Solution**:
+
 - Start Docker: `sudo systemctl start docker`
 - Enable Docker: `sudo systemctl enable docker`
 
