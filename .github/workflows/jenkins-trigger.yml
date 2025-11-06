@@ -1,0 +1,15 @@
+# Optional: GitHub Actions to trigger Jenkins (if webhook doesn't work)
+name: Trigger Jenkins Build
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  trigger-jenkins:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Jenkins Job
+        run: |
+          echo "Push to GitHub detected. Jenkins webhook should trigger the build."
+          echo "If webhook is configured, Jenkins will start building automatically."
